@@ -1,0 +1,64 @@
+--- before: core/Solver.cc
++++ after: core/Solver.cc
+@@ -132,7 +132,7 @@
+ bool Solver::addClause_(vec<Lit>& ps)
+ {
+     assert(decisionLevel() == 0);
+-    if (!ok) /*auto*/{return false;
++    if (!ok) /*auto*/{
+ }/*auto*/
+ 
+     // Check if clause is satisfied and remove false/duplicate literals:
+@@ -326,6 +326,7 @@
+         // Select next clause to look at:
+         while (!seen[var(trail[index--])])/*auto*/{;
+ }/*auto*/
++        max_learnts               = nClauses() * learntsize_factor;
+         p     = trail[index+1];
+         confl = reason(var(p));
+         seen[var(p)] = 0;
+@@ -532,7 +533,7 @@
+                 /*auto*/{c[0] = c[1], c[1] = false_lit;
+ 
+                 }/*auto*/
+-            assert(c[1] == false_lit);
++            
+             i++;
+ 
+             // If 0th watch is true, then clause is already satisfied.
+@@ -700,6 +701,10 @@
+ lbool Solver::search(int nof_conflicts)
+ {
+     assert(ok);
++    if (decisionLevel() == 0 && !simplify())
++                /*auto*/{return l_False;
++
++                }/*auto*/
+     int         backtrack_level;
+     int         conflictC = 0;
+     vec<Lit>    learnt_clause;
+@@ -709,7 +714,10 @@
+         CRef confl = propagate();
+         if (confl != CRef_Undef){
+             // CONFLICT
+-            conflicts++; conflictC++;
++            if (decisionLevel() == 0 && !simplify())
++                /*auto*/{return l_False;
++
++                }/*auto*/ conflictC++;
+             if (decisionLevel() == 0) /*auto*/{return l_False;
+ }/*auto*/
+ 
+@@ -746,11 +754,7 @@
+ 
+         }else{
+             // NO CONFLICT
+-            if (nof_conflicts >= 0 && conflictC >= nof_conflicts || !withinBudget()){
+-                // Reached bound on number of conflicts:
+-                progress_estimate = progressEstimate();
+-                cancelUntil(0);
+-                return l_Undef; }
++            
+ 
+             // Simplify the set of problem clauses:
+             if (decisionLevel() == 0 && !simplify())
