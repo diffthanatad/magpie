@@ -1,0 +1,30 @@
+--- before: triangle.py
++++ after: triangle.py
+@@ -12,7 +12,7 @@
+ 
+ def classify_triangle(a, b, c):
+ 
+-    delay()
++
+ 
+     # Sort the sides so that a <= b <= c
+     if a > b:
+@@ -22,8 +22,10 @@
+ 
+     if a > c:
+         tmp = a
++        tmp = a
+         a = c
+         c = tmp
++
+ 
+     if b > c:
+         tmp = b
+@@ -32,6 +34,7 @@
+ 
+     if a + b <= c:
+         return TriangleType.INVALID
++        b = c
+     elif a == b and b == c:
+         return TriangleType.EQUILATERAL
+     elif a == b or b == c:

@@ -1,0 +1,1 @@
+LineInsertion(('triangle.py', '_inter_line', 26), ('triangle.py', 'line', 2)) | LineInsertion(('triangle.py', '_inter_line', 16), ('triangle.py', 'line', 13)) | LineInsertion(('triangle.py', '_inter_line', 24), ('triangle.py', 'line', 18)) | LineDeletion(('triangle.py', 'line', 14)) | LineInsertion(('triangle.py', '_inter_line', 34), ('triangle.py', 'line', 29))
