@@ -1,4 +1,4 @@
-_magpie*
+# _magpie*
 
 # Compiled python modules.
 *.pyc
@@ -8,3 +8,5 @@ _magpie*
 
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
+
+/venv
